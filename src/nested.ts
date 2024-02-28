@@ -238,7 +238,6 @@ export function changeQuestionTypeById(
     return update;
 }
 
-
 /**
  * Consumes an array of Questions and produces a new array of Questions, where all
  * the Questions are the same EXCEPT for the one with the given `targetId`. That
