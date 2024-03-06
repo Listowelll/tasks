@@ -28,6 +28,7 @@ export function StartAttempt(): JSX.Element {
             <Button onClick={stopQuiz} disabled={!progress}>
                 Stop Quiz
             </Button>
+            Attempts :{attempt}
         </span>
     );
 }
