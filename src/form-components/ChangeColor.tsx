@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-
 export function ChangeColor(): JSX.Element {
     const colors = [
-        "red",
+        "magenta",
         "blue",
         "green",
         "yellow",
@@ -15,42 +14,46 @@ export function ChangeColor(): JSX.Element {
         "black"
     ];
 
-    const [selectedColor, setSelectedColor] = useState<string>("");
+    const [selectedColor, setSelectedColor] = useState<string>("magenta");
 
-    const handleColorChange = (color: string) => {
-        setSelectedColor(color);
+    const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedColor(event.target.value);
     };
 
     return (
         <div>
             <h3>Change Color</h3>
-            {colors.map((color, index) => (
-                <Form.Check
-                    key={index}
-                    type="radio"
-                    name="color"
-                    id={`color-check-${index}`}
-                    label={color}
-                    inline
-                    onChange={() => handleColorChange(color)}
-                    checked={selectedColor === color}
-                />
-            ))}
-            <div
-                data-testid="colored-box"
-                style={{
-                    width: "100px",
-                    height: "100px",
-                    backgroundColor: selectedColor,
-                    marginTop: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white"
-                }}
-            >
-                {selectedColor}
+            <div style={{ marginBottom: "10px" }}>
+                {colors.map((color, index) => (
+                    <Form.Check
+                        key={index}
+                        type="radio"
+                        name="color"
+                        id={`color-check-${index}`}
+                        label={color}
+                        inline
+                        value={color}
+                        style={{ backgroundColor: color }}
+                        onChange={handleColorChange}
+                        checked={selectedColor === color}
+                    />
+                ))}
             </div>
+
+            <p>
+                You have chosen{" "}
+                <span
+                    style={{
+                        backgroundColor: selectedColor,
+                        padding: "2px 5px",
+                        borderRadius: "3px"
+                    }}
+                    data-testid="colored-box"
+                >
+                    {selectedColor}
+                </span>
+                .
+            </p>
         </div>
     );
 }

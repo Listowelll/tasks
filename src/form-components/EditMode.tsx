@@ -22,28 +22,33 @@ export function EditMode(): JSX.Element {
         <div>
             <h3>Edit Mode</h3>
             <Form>
-                <Form.Group controlId="formName">
-                    <Form.Label>Name:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={name}
-                        onChange={handleNameChange}
-                        disabled={!editMode}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formStudent">
-                    <Form.Check
-                        type="switch"
-                        label="Student"
-                        checked={isStudent}
-                        onChange={handleStudentChange}
-                        disabled={!editMode}
-                    />
-                </Form.Group>
+                {editMode && (
+                    <Form.Group controlId="formName">
+                        <Form.Label>Name:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={name}
+                            onChange={handleNameChange}
+                        />
+                    </Form.Group>
+                )}
+                {editMode && (
+                    <Form.Group controlId="formStudent">
+                        <Form.Check
+                            type="checkbox"
+                            label="Student"
+                            checked={isStudent}
+                            onChange={handleStudentChange}
+                        />
+                    </Form.Group>
+                )}
             </Form>
-            <Button onClick={toggleEditMode}>
-                {editMode ? "Exit Edit Mode" : "Enter Edit Mode"}
-            </Button>
+            <Form.Switch
+                id="editModeSwitch"
+                label={editMode ? "Edit Mode" : "View Mode"}
+                checked={editMode}
+                onChange={toggleEditMode}
+            />
             {!editMode && (
                 <div>
                     <p>
